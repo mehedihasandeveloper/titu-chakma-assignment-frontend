@@ -14,7 +14,7 @@ export class InsertProductComponent {
     productName: '',
     price: '',
     category: '',
-    quantity: 0
+    quantity: null
   };
 
   productList: any[] = [];
@@ -63,6 +63,7 @@ export class InsertProductComponent {
             quantity: data.quantity
           };
           this.setAlert('Product fetched successfully!', 'success');
+
         },
         (error) => {
           console.error('Error fetching product:', error);
@@ -77,7 +78,6 @@ export class InsertProductComponent {
   insertProduct(): void {
     this.productService.addProduct(this.product).subscribe(
       (response) => {
-        console.log(response.message);
         this.setAlert('Product added successfully!', 'success');
         this.loadAllProducts();
         this.clearForm();
@@ -104,7 +104,35 @@ export class InsertProductComponent {
       productName: '',
       price: '',
       category: '',
-      quantity: 0
+      quantity: null
     };
   }
+
+  categories: string[] = [
+    'Desktop', 'Laptop', 'Monitor', 'UPS', 'Phone', 'Tablet',
+    'Camera', 'TV', 'MOUSE', 'KEYBORD', 'RAM', 'SSD', 'HDD',
+    'ROUTER', 'PRINTER'
+  ];
+
+  sellProduct(): void {
+    if (!this.product.productId || !this.product.quantity || this.product.quantity <= 0) {
+      this.setAlert('Please enter a valid product ID and quantity!', 'warning');
+      return;
+    }
+
+    this.productService.sellProduct(this.product.productId, this.product.quantity).subscribe(
+      (response) => {
+        this.setAlert(response, 'success');
+        this.loadAllProducts();
+        this.clearForm();
+      },
+      (error) => {
+        console.error('Error selling product:', error);
+        this.setAlert('Failed to sell product!', 'danger');
+      }
+    );
+  }
+
+
+
 }

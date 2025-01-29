@@ -1,107 +1,101 @@
-<div class="container mt-5 mb-2">
-
-    <h1 class="display-5"><span> <img src="../../../assets/logo.png" alt="" height="80px" width="80px"></span>
-        FutureTech </h1>
+<div class="container mt-4 mb-2 text-center">
+    <h1 class="display-5 d-flex align-items-center justify-content-center gap-3">
+        <img src="../../../assets/logo.png" alt="FutureTech Logo" class="rounded-circle shadow-sm" height="70"
+            width="70">
+        <span class="fw-bold text-primary">FutureTech</span>
+    </h1>
 </div>
 
-<div class="container mt-4 mb-5">
-    <div *ngIf="alertMessage" class="alert" [ngClass]="alertClass" role="alert">
-        {{ alertMessage }}
+<!-- Alert Message -->
+<div class="container mt-4 mb-4">
+    <div *ngIf="alertMessage" class="alert alert-dismissible fade show shadow-sm" [ngClass]="alertClass" role="alert">
+        <strong>{{ alertMessage }}</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
             (click)="closeAlert()"></button>
     </div>
 </div>
 
+<div class="container mt-2 mb-5 p-4 bg-light rounded shadow-sm">
+    <h4 class="fw-bold text-dark border-bottom pb-3">📋 Product Management</h4>
 
-
-<div class="container mt-2 mb-5">
-
-    <div class="row mb-3">
-        <div class="col-md-3">
-            <label for="productId" class="form-label">Product ID:</label>
+    <!-- Product ID & View Button -->
+    <div class="row mb-3 align-items-center">
+        <div class="col-md-3 text-md-end">
+            <label for="productId" class="form-label fw-semibold">Product ID:</label>
         </div>
         <div class="col-md-6">
-            <input type="text" id="productId" class="form-control" [(ngModel)]="product.productId" />
+            <input type="text" id="productId" class="form-control shadow-sm" [(ngModel)]="product.productId">
         </div>
         <div class="col-md-3">
-            <button class="btn btn-primary w-100" (click)="viewProduct()">View</button>
+            <button class="btn btn-dark w-100 shadow-sm" (click)="viewProduct()">🔍 View</button>
         </div>
     </div>
 
-
-    <div class="row mb-3">
-        <div class="col-md-3">
-            <label for="productName" class="form-label">Product Name:</label>
+    <!-- Product Name -->
+    <div class="row mb-3 align-items-center">
+        <div class="col-md-3 text-md-end">
+            <label for="productName" class="form-label fw-semibold">Product Name:</label>
         </div>
         <div class="col-md-9">
-            <input type="text" id="productName" class="form-control" [(ngModel)]="product.productName" />
+            <input type="text" id="productName" class="form-control shadow-sm" [(ngModel)]="product.productName">
         </div>
     </div>
 
-    <div class="row mb-3">
-        <div class="col-md-3">
-            <label for="price" class="form-label">Unit Price:</label>
+    <!-- Unit Price -->
+    <div class="row mb-3 align-items-center">
+        <div class="col-md-3 text-md-end">
+            <label for="price" class="form-label fw-semibold">Unit Price:</label>
         </div>
         <div class="col-md-9">
-            <input type="text" id="price" class="form-control" [(ngModel)]="product.price" />
+            <input type="text" id="price" class="form-control shadow-sm" [(ngModel)]="product.price">
         </div>
     </div>
 
-    <div class="row mb-3">
-        <div class="col-md-3">
-            <label for="quantity" class="form-label">Quantity:</label>
+    <!-- Quantity -->
+    <div class="row mb-3 align-items-center">
+        <div class="col-md-3 text-md-end">
+            <label for="quantity" class="form-label fw-semibold">Quantity:</label>
         </div>
         <div class="col-md-9">
-            <input type="number" id="quantity" class="form-control" [(ngModel)]="product.price" />
+            <input type="number" id="quantity" class="form-control shadow-sm" [(ngModel)]="product.quantity">
         </div>
     </div>
 
-    <div class="row mb-3">
-        <div class="col-md-3">
-            <label for="category" class="form-label">Category:</label>
+    <!-- Category -->
+    <div class="row mb-3 align-items-center">
+        <div class="col-md-3 text-md-end">
+            <label for="category" class="form-label fw-semibold">Category:</label>
         </div>
         <div class="col-md-9">
-            <input type="text" id="category" class="form-control" [(ngModel)]="product.category" />
+            <select id="category" class="form-select shadow-sm" [(ngModel)]="product.category">
+                <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+            </select>
         </div>
     </div>
 
 
-    <div class="row mt-3">
+    <!-- Action Buttons -->
+    <div class="row mt-4">
         <div class="col-md-3">
-            <button class="btn btn-success w-100" (click)="insertProduct()">Insert</button>
+            <button class="btn btn-success w-100 shadow-sm fw-bold" (click)="insertProduct()">✅ Insert</button>
         </div>
         <div class="col-md-3">
-            <button class="btn btn-warning w-100" (click)="updateProduct()">Update</button>
+            <button class="btn btn-warning w-100 shadow-sm fw-bold" (click)="updateProduct()">✏️ Update</button>
         </div>
         <div class="col-md-3">
-            <button class="btn btn-danger w-100" (click)="deleteProduct()">Delete</button>
+            <button class="btn btn-danger w-100 shadow-sm fw-bold" (click)="deleteProduct()">🗑️ Delete</button>
         </div>
         <div class="col-md-3">
-            <button class="btn btn-secondary w-100" (click)="clearForm()">Clear</button>
+            <button class="btn btn-secondary w-100 shadow-sm fw-bold" (click)="clearForm()">♻️ Clear</button>
         </div>
     </div>
-    
+
     <!-- Sell Button -->
-    <div class="row mt-3">
-        <div class="col-md-12 text-center">
-            <button class="btn btn-primary px-5 py-2 fw-bold" >Sell</button>
+
+    <div class="row mt-4 text-center">
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary px-5 py-2 fw-bold shadow-sm" (click)="sellProduct()">🛒 Sell</button>
         </div>
     </div>
-    
+
 </div>
-
-
-    <!-- <div class="row">
-        <div class="col-md-3">
-            <button class="btn btn-success w-100" (click)="insertProduct()">Insert</button>
-        </div>
-        <div class="col-md-3">
-            <button class="btn btn-warning w-100" (click)="updateProduct()">Update</button>
-        </div>
-        <div class="col-md-3">
-            <button class="btn btn-danger w-100" (click)="deleteProduct()">Delete</button>
-        </div>
-        <div class="col-md-3">
-            <button class="btn btn-secondary w-100" (click)="clearForm()">Clear</button>
-        </div>
-    </div> -->
